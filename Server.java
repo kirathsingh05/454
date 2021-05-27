@@ -31,11 +31,17 @@ class Server {
 		}
 	}
 
+
 	// MAIN
 	public static void main(String args[]) throws Exception {
 		if (args.length != 1) {
 			System.out.println("usage: java Server port");
 			// open
+			// --
+			int port = Integer.parseInt(args[0]);
+			ServerSocket ssock = new ServerSocket(port);
+			System.out.println("listening on port " + port);
+			// --
 			Socket csock = ssock.accept();
 			System.out.println("accepted connection " + csock);
 

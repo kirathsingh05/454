@@ -80,6 +80,7 @@ class Server {
 		        	sb.append(key);
 		        	sb.append(" ");
 		        	sb.append(temp.get(key));   
+		        	sb.append("\n");
 		    	}
 				result = sb.toString();
 				

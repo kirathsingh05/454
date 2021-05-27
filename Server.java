@@ -46,25 +46,28 @@ class Server {
 			din.readFully(bytes);
 
 			int i = 0;
-			while (i < bytes.length) {
-				int node1;
-				int node2;
-				// #1
-				node1 = 0;
-				node2 = 0;
-				while(bytes[i] != 32){
-					node1 = 10*node1 + (bytes[i] - 48) ; 	//48 offs.
+			while (i < bytes.length) { 
+				try {
+					int node1;
+					int node2;
+					// #1
+					node1 = 0;
+					node2 = 0;
+					while(bytes[i] != 32){
+						node1 = 10*node1 + (bytes[i] - 48) ; 	//48 offs.
+						i++;
+					}
 					i++;
-				}
-				i++;
-				while(bytes[i] !=10 ){ 						//#2
-					node2 = (bytes[i] - 48) + 10*node2 ;
+					while(bytes[i] !=10 ){ 						//#2
+						node2 = (bytes[i] - 48) + 10*node2 ;
+						i++;
+					}
 					i++;
+					updateValues(node1,node2);
+				} catch (Exception e) {
+				e.printStackTrace();
 				}
-				i++;
-				updateValues(node1,node2);
 			}
-
 			String result = new String();
 			HashMap<Integer, Integer> temp = edges;
 			StringBuilder sb = new StringBuilder();
@@ -82,10 +85,6 @@ class Server {
 			dout.write(bytes);
 			dout.flush();
 			System.out.println("#result data (in bytes): " + bytes.length);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		} 
 	}
 }

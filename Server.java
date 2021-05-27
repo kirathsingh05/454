@@ -44,7 +44,7 @@ class Server {
 				Socket csock = ssock.accept();
 				System.out.println("Accepted connection: " + csock);
 				
-				//read request into byte array
+				// read data input acc.
 				DataInputStream din = new DataInputStream(csock.getInputStream());
 				int reqDataLen = din.readInt();
 				System.out.println("received request header, data payload has length " + reqDataLen);
@@ -59,20 +59,22 @@ class Server {
 					// assn.
 					node1 = 0;
 					node2 = 0;
-					// read first vertex
+					// #1
 					while(bytes[i] != 32){
-						node1 = node1*10 + (bytes[i]-48) ;
+						node1 = (node1*10) + (bytes[i]-48) ; //48 offs.
 						i++;
 					}
 					i++;
-					// get second vertex
+					// #2
 					while(bytes[i] !=10 ){
-						node2 = node2*10 + (bytes[i]-48) ;
+						node2 = (node2*10) + (bytes[i]-48) ;
 						i++;
 					}
 					i++;
-					updateValues(node1,node2);
+					updateValues(node1, node2);
 				}
+
+				// stringify result
 				String result = new String();
 				HashMap<Integer, Integer> temp = edges;
 				StringBuilder sb = new StringBuilder();
